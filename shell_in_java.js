@@ -45,10 +45,10 @@ while (true) {
           console.log('This format is not accepted. Please, use bing [-k|-p|-c] <processId>');
           return;
         }
-        const bing_Option = pieces[1];
+        const bing_opt = pieces[1];
         const process_ID = pieces[2];
         // The 3 options we can apply on a process : kill, pause, continue 
-        switch (bing_Option) 
+        switch (bing_opt) 
         {
           case '-k':
             exec(`kill ${process_ID}`, (err, stdout, stderr) => {
