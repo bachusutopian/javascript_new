@@ -42,7 +42,7 @@ while (true) {
       case 'bing':
         if (pieces.length !== 3) 
         {
-          console.log('This format is not accepted. Please, use bing [-k|-p|-c] <processId>');
+          console.log('This format is not accepted. Please, tap instead bing "-k","-p","-c" <processId>');
           return;
         }
         const bing_opt = pieces[1];
@@ -80,7 +80,7 @@ while (true) {
             });
             break;
           default:
-            console.log('Not a valid option. Please, use [-k|-p|-c]');
+            console.log('Not a valid option. Please, tap instead "-k","-p","-c"');
         }
         break;
         }
