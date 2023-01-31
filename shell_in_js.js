@@ -44,7 +44,7 @@ while (true) {
       case 'bing':
         if (pieces.length !== 3) 
         {
-          console.log('This format is not accepted. Please, tap instead bing "-k","-p","-c" <processId>');
+          console.log('This format is not accepted. Please, tap instead bing "-kill","-pause","-continue" <processId>');
           return;
         }
         const bing_opt = pieces[1];
@@ -82,7 +82,7 @@ while (true) {
             });
             break;
           default:
-            console.log('Not a valid option. Please, tap instead "-k","-p","-c"');
+            console.log('Not a valid option. Please, tap instead "-kill","-pause","-continue"');
         }
         break;
         //running the background command
