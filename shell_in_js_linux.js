@@ -1,5 +1,4 @@
 
-
 const readline = require('readline');
 const { exec } = require('child_process');
 //promise 
@@ -16,19 +15,29 @@ async function command_execution(command) {
   }
 }
 
+
+process.stdin.setRawMode(true);  // for the program exit
+process.stdin.resume();
+
+
 async function main() {
   const readline = require("readline");
   const read_line = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
-
+read_line.on("keypress", (str, key) => {
+  if (key.ctrl && key.name === "d") {   
+    console.log("Shell Exit. Program Terminated.");  // CTRL-D for exiting the program; CTRL-P doesn't work on my Romanian keyboard :)
+    process.exit(0);
+    }
+  });
   while (true) {
     const command = await new Promise((resolve) => {
       read_line.question("> ", resolve);
     });
 
-    const part_of_the_command = command.split(" ");
+    const part_of_the_command = command.split(" ");   // I split the user input 
     const option = part_of_the_command[0]; // in this String I take the first word , example : >lp   -is the first word
 
     switch (option) {
@@ -67,10 +76,6 @@ async function main() {
       case "!":
         console.log(await command_execution(`${command} &`));
         break;
-      case "CTRL-P":
-        console.log("Shell Exit. Program Terminated.");
-        process.exit(0);
-        break;
       case "keep":
         if (part_of_the_command.length !== 2) {
           console.log("Please provide a valid process ID");
@@ -83,10 +88,7 @@ async function main() {
     }
   }
 }
-process.on("SIGINT", () => {
-  console.log("Shell Exit. Program Terminated.");
-  process.exit(0);
-});
+
 main();
 
 
