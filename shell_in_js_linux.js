@@ -1,7 +1,6 @@
 
 const readline = require('readline');
 const { exec } = require('child_process');
-//promise 
 const { promisify } = require("util");
 const execP = promisify(exec);
 
@@ -26,6 +25,7 @@ async function main() {
     input: process.stdin,
     output: process.stdout,
   });
+  //exiting the program
 read_line.on("keypress", (str, key) => {
   if (key.ctrl && key.name === "d") {   
     console.log("Shell Exit. Program Terminated.");  // CTRL-D for exiting the program; CTRL-P doesn't work on my Romanian keyboard :)
@@ -33,6 +33,7 @@ read_line.on("keypress", (str, key) => {
     }
   });
   while (true) {
+    //promise 
     const command = await new Promise((resolve) => {
       read_line.question("> ", resolve);
     });
@@ -46,6 +47,7 @@ read_line.on("keypress", (str, key) => {
         console.log(await command_execution(command));
         break;
       case "lp":
+        //print the processes
         console.log(await command_execution("ps"));
         break;
       case "bing":
@@ -61,7 +63,7 @@ read_line.on("keypress", (str, key) => {
 
         switch (bing_opt) {
           case "-kill":
-            console.log(await command_execution(`kill -9 ${process_ID}`));
+            console.log(await command_execution(`kill -9 ${process_ID}`));   // kill -9 - sends a kill signal to terminate any process immediately  - in my opinion is better
             break;
           case "-pause":
             console.log(await command_execution(`kill -STOP ${process_ID}`)); // kill -SIGSTOP would be another way to pause a process
@@ -77,8 +79,10 @@ read_line.on("keypress", (str, key) => {
         console.log(await command_execution(`${command} &`));
         break;
       case "keep":
+        
         if (part_of_the_command.length !== 2) {
-          console.log("Please provide a valid process ID");
+          console
+          .log("Please provide a valid process ID");
           return;
         }
         const process_ID_2 = part_of_the_command[1];
