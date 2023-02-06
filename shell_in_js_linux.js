@@ -78,6 +78,9 @@ read_line.on("keypress", (str, key) => {
       case "!":
         console.log(await command_execution(`${command} &`));
         break;
+      case "ls":
+        console.log(await command_execution("ls"));
+        break;
       case "keep":
         
         if (part_of_the_command.length !== 2) {
